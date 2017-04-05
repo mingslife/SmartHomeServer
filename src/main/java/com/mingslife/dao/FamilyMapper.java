@@ -17,4 +17,6 @@ public interface FamilyMapper {
 	long count(@Param("parameters") String parameters, @Param("condition") String condition, @Param("isDistinct") boolean isDistinct);
 	double sum(@Param("parameter") String parameter, @Param("condition") String condition, @Param("order") String order, @Param("sort") String sort, @Param("offset") int offset, @Param("limit") int limit, @Param("isDistinct") boolean isDistinct);
 	Family find(@Param("id") Integer id, @Param("parameters") String parameters);
+
+	Family findByIdAndToken(@Param("id") Integer id, @Param("token") String token);
 }

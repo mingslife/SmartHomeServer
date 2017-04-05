@@ -164,4 +164,9 @@ public class FamilyService implements IFamilyService {
 	public double sum(String parameter, String condition, Object[] values, String order, String sort, int curPage, int limit, boolean isDistinct) {
 		return familyMapper.sum(parameter, SQLUtil.fillCondition(condition, values), order, sort, SQLUtil.getOffset(curPage, limit), limit, isDistinct);
 	}
+
+	@Override
+	public Family findByIdAndToken(Integer id, String token) {
+		return familyMapper.findByIdAndToken(id, token);
+	}
 }

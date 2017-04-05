@@ -3,6 +3,7 @@ package com.mingslife.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mingslife.web.annotation.CreateDate;
 import com.mingslife.web.annotation.UpdateDate;
 
@@ -14,8 +15,10 @@ public class Humiture implements Serializable {
 	private Double temperature;
 	private Double humidity;
 	private Date recordDate;
+	@JsonIgnore
 	@CreateDate
 	private Date createDate;
+	@JsonIgnore
 	@UpdateDate
 	private Date updateDate;
 

@@ -147,4 +147,7 @@
   <select id="find" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select ${parameters} from families where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="findByIdAndToken" resultMap="BaseResultMap">
+    select id from families where id = #{id,jdbcType=INTEGER} and token = #{token,jdbcType=VARCHAR}
+  </select>
 </mapper>

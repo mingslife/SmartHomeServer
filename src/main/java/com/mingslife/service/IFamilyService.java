@@ -35,4 +35,6 @@ public interface IFamilyService {
 	double sum(String parameter, String condition, Object[] values, int curPage, int limit);
 	double sum(String parameter, String condition, Object[] values, String order, String sort, int curPage, int limit);
 	double sum(String parameter, String condition, Object[] values, String order, String sort, int curPage, int limit, boolean isDistinct);
+
+	Family findByIdAndToken(Integer id, String token);
 }
