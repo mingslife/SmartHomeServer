@@ -58,7 +58,7 @@ public class ApiController extends BaseController {
 	@ModelAttribute
 	public void validate(@RequestParam("family_id") Integer familyId, @RequestParam("token") String token) {
 		if (familyService.findByIdAndToken(familyId, token) == null) {
-			throw new WebException("无此家庭组！");
+			throw new WebException("无效家庭组！");
 		}
 	}
 }

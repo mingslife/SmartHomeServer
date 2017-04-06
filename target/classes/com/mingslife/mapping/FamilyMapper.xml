@@ -148,6 +148,6 @@
     select ${parameters} from families where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="findByIdAndToken" resultMap="BaseResultMap">
-    select id from families where id = #{id,jdbcType=INTEGER} and token = #{token,jdbcType=VARCHAR}
+    select id from families where id = #{id,jdbcType=INTEGER} and token = #{token,jdbcType=VARCHAR} and is_active = 1
   </select>
 </mapper>
