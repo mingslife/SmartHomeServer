@@ -164,4 +164,14 @@ public class LampService implements ILampService {
 	public double sum(String parameter, String condition, Object[] values, String order, String sort, int curPage, int limit, boolean isDistinct) {
 		return lampMapper.sum(parameter, SQLUtil.fillCondition(condition, values), order, sort, SQLUtil.getOffset(curPage, limit), limit, isDistinct);
 	}
+
+	@Override
+	public List<Lamp> loadByFamilyId(Integer familyId) {
+		return lampMapper.loadByFamilyId(familyId);
+	}
+
+	@Override
+	public Lamp findByFamilyIdAndId(Integer familyId, Integer id) {
+		return lampMapper.findByFamilyIdAndId(familyId, id);
+	}
 }

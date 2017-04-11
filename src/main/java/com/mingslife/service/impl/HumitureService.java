@@ -164,4 +164,19 @@ public class HumitureService implements IHumitureService {
 	public double sum(String parameter, String condition, Object[] values, String order, String sort, int curPage, int limit, boolean isDistinct) {
 		return humitureMapper.sum(parameter, SQLUtil.fillCondition(condition, values), order, sort, SQLUtil.getOffset(curPage, limit), limit, isDistinct);
 	}
+
+	@Override
+	public List<Humiture> loadByFamilyId(Integer familyId) {
+		return humitureMapper.loadByFamilyId(familyId);
+	}
+
+	@Override
+	public Humiture findByFamilyIdAndId(Integer familyId, Integer id) {
+		return humitureMapper.findByFamilyIdAndId(familyId, id);
+	}
+
+	@Override
+	public Humiture findLastestByFamilyId(Integer familyId) {
+		return humitureMapper.findLastestByFamilyId(familyId);
+	}
 }

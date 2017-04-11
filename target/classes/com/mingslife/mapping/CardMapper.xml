@@ -4,12 +4,12 @@
   <resultMap id="BaseResultMap" type="com.mingslife.model.Card">
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="card_number" property="cardNumber" jdbcType="VARCHAR" />
-    <result column="is_active" property="isActive" jdbcType="BIT" />
+    <result column="family_id" property="familyId" jdbcType="INTEGER" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="BaseColumnList">
-    id, card_number, is_active, create_date, update_date
+    id, card_number, family_id, create_date, update_date
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
@@ -22,10 +22,10 @@
   </delete>
   <insert id="insert" parameterType="com.mingslife.model.Card" useGeneratedKeys="true" keyProperty="id">
     insert into cards (
-      id, card_number, is_active,
+      id, card_number, family_id,
       create_date, update_date
     ) values (
-      #{id,jdbcType=INTEGER}, #{cardNumber,jdbcType=VARCHAR}, #{isActive,jdbcType=BIT},
+      #{id,jdbcType=INTEGER}, #{cardNumber,jdbcType=VARCHAR}, #{familyId,jdbcType=INTEGER},
       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
     )
   </insert>
@@ -38,8 +38,8 @@
       <if test="cardNumber != null">
         card_number,
       </if>
-      <if test="isActive != null">
-        is_active,
+      <if test="familyId != null">
+        family_id,
       </if>
       <if test="createDate != null">
         create_date,
@@ -55,8 +55,8 @@
       <if test="cardNumber != null">
         #{cardNumber,jdbcType=VARCHAR},
       </if>
-      <if test="isActive != null">
-        #{isActive,jdbcType=BIT},
+      <if test="familyId != null">
+        #{familyId,jdbcType=INTEGER},
       </if>
       <if test="createDate != null">
         #{createDate,jdbcType=TIMESTAMP},
@@ -72,8 +72,8 @@
       <if test="cardNumber != null">
         card_number = #{cardNumber,jdbcType=VARCHAR},
       </if>
-      <if test="isActive != null">
-        is_active = #{isActive,jdbcType=BIT},
+      <if test="familyId != null">
+        family_id = #{familyId,jdbcType=INTEGER},
       </if>
       <if test="createDate != null">
         create_date = #{createDate,jdbcType=TIMESTAMP},
@@ -88,7 +88,7 @@
     update cards
     set
       card_number = #{cardNumber,jdbcType=VARCHAR},
-      is_active = #{isActive,jdbcType=BIT},
+      family_id = #{familyId,jdbcType=INTEGER},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
@@ -146,5 +146,11 @@
   </select>
   <select id="find" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select ${parameters} from cards where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="loadByFamilyId" resultMap="BaseResultMap">
+    select id, family_id, card_number from cards where family_id = #{familyId,jdbcType=INTEGER}
+  </select>
+  <select id="findByFamilyIdAndId" resultMap="BaseResultMap">
+    select id, family_id, card_number from cards where family_id = #{familyId,jdbcType=INTEGER} and id = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

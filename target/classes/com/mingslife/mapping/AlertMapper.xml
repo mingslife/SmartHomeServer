@@ -161,4 +161,10 @@
   <select id="find" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select ${parameters} from alerts where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="loadByFamilyId" resultMap="BaseResultMap">
+    select id, family_id, message from alerts where family_id = #{familyId,jdbcType=INTEGER}
+  </select>
+  <select id="findByFamilyIdAndId" resultMap="BaseResultMap">
+    select id, family_id, message from alerts where family_id = #{familyId,jdbcType=INTEGER} and id = #{id,jdbcType=INTEGER}
+  </select>
 </mapper>

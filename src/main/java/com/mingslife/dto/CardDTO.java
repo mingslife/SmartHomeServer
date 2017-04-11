@@ -7,19 +7,19 @@ import com.mingslife.model.Card;
 public class CardDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private String cardNumber;
 
-	public Integer getId() {
-		return id;
+	public String getCardNumber() {
+		return cardNumber;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 
 	public Card toModel() {
 		Card model = new Card();
-		model.setId(id);
+		model.setCardNumber(cardNumber);
 		return model;
 	}
 }

@@ -164,4 +164,14 @@ public class DoorService implements IDoorService {
 	public double sum(String parameter, String condition, Object[] values, String order, String sort, int curPage, int limit, boolean isDistinct) {
 		return doorMapper.sum(parameter, SQLUtil.fillCondition(condition, values), order, sort, SQLUtil.getOffset(curPage, limit), limit, isDistinct);
 	}
+
+	@Override
+	public List<Door> loadByFamilyId(Integer familyId) {
+		return doorMapper.loadByFamilyId(familyId);
+	}
+
+	@Override
+	public Door findByFamilyIdAndId(Integer familyId, Integer id) {
+		return doorMapper.findByFamilyIdAndId(familyId, id);
+	}
 }

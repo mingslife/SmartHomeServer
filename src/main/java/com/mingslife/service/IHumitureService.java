@@ -35,4 +35,8 @@ public interface IHumitureService {
 	double sum(String parameter, String condition, Object[] values, int curPage, int limit);
 	double sum(String parameter, String condition, Object[] values, String order, String sort, int curPage, int limit);
 	double sum(String parameter, String condition, Object[] values, String order, String sort, int curPage, int limit, boolean isDistinct);
+
+	List<Humiture> loadByFamilyId(Integer familyId);
+	Humiture findByFamilyIdAndId(Integer familyId, Integer id);
+	Humiture findLastestByFamilyId(Integer familyId);
 }

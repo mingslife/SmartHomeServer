@@ -12,7 +12,7 @@ public class Card implements Serializable {
 
 	private Integer id;
 	private String cardNumber;
-	private Boolean isActive;
+	private Integer familyId;
 	@JsonIgnore
 	@CreateDate
 	private Date createDate;
@@ -36,12 +36,12 @@ public class Card implements Serializable {
 		this.cardNumber = cardNumber;
 	}
 
-	public Boolean getIsActive() {
-		return isActive;
+	public Integer getFamilyId() {
+		return familyId;
 	}
 
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
+	public void setFamilyId(Integer familyId) {
+		this.familyId = familyId;
 	}
 
 	public Date getCreateDate() {

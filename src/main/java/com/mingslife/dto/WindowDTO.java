@@ -7,19 +7,19 @@ import com.mingslife.model.Window;
 public class WindowDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private Byte status;
 
-	public Integer getId() {
-		return id;
+	public Byte getStatus() {
+		return status;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setStatus(Byte status) {
+		this.status = status;
 	}
 
 	public Window toModel() {
 		Window model = new Window();
-		model.setId(id);
+		model.setStatus(status);
 		return model;
 	}
 }

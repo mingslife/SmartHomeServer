@@ -164,4 +164,14 @@ public class WindowService implements IWindowService {
 	public double sum(String parameter, String condition, Object[] values, String order, String sort, int curPage, int limit, boolean isDistinct) {
 		return windowMapper.sum(parameter, SQLUtil.fillCondition(condition, values), order, sort, SQLUtil.getOffset(curPage, limit), limit, isDistinct);
 	}
+
+	@Override
+	public List<Window> loadByFamilyId(Integer familyId) {
+		return windowMapper.loadByFamilyId(familyId);
+	}
+
+	@Override
+	public Window findByFamilyIdAndId(Integer familyId, Integer id) {
+		return windowMapper.findByFamilyIdAndId(familyId, id);
+	}
 }

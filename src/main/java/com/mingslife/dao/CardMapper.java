@@ -17,4 +17,7 @@ public interface CardMapper {
 	long count(@Param("parameters") String parameters, @Param("condition") String condition, @Param("isDistinct") boolean isDistinct);
 	double sum(@Param("parameter") String parameter, @Param("condition") String condition, @Param("order") String order, @Param("sort") String sort, @Param("offset") int offset, @Param("limit") int limit, @Param("isDistinct") boolean isDistinct);
 	Card find(@Param("id") Integer id, @Param("parameters") String parameters);
+
+	List<Card> loadByFamilyId(@Param("familyId") Integer familyId);
+	Card findByFamilyIdAndId(@Param("familyId") Integer familyId, @Param("id") Integer id);
 }

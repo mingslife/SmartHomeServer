@@ -164,4 +164,14 @@ public class AlertService implements IAlertService {
 	public double sum(String parameter, String condition, Object[] values, String order, String sort, int curPage, int limit, boolean isDistinct) {
 		return alertMapper.sum(parameter, SQLUtil.fillCondition(condition, values), order, sort, SQLUtil.getOffset(curPage, limit), limit, isDistinct);
 	}
+
+	@Override
+	public List<Alert> loadByFamilyId(Integer familyId) {
+		return alertMapper.loadByFamilyId(familyId);
+	}
+
+	@Override
+	public Alert findByFamilyIdAndId(Integer familyId, Integer id) {
+		return alertMapper.findByFamilyIdAndId(familyId, id);
+	}
 }

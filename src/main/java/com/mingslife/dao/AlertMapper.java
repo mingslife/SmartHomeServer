@@ -17,4 +17,7 @@ public interface AlertMapper {
 	long count(@Param("parameters") String parameters, @Param("condition") String condition, @Param("isDistinct") boolean isDistinct);
 	double sum(@Param("parameter") String parameter, @Param("condition") String condition, @Param("order") String order, @Param("sort") String sort, @Param("offset") int offset, @Param("limit") int limit, @Param("isDistinct") boolean isDistinct);
 	Alert find(@Param("id") Integer id, @Param("parameters") String parameters);
+
+	List<Alert> loadByFamilyId(@Param("familyId") Integer familyId);
+	Alert findByFamilyIdAndId(@Param("familyId") Integer familyId, @Param("id") Integer id);
 }

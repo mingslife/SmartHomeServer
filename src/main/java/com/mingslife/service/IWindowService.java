@@ -35,4 +35,7 @@ public interface IWindowService {
 	double sum(String parameter, String condition, Object[] values, int curPage, int limit);
 	double sum(String parameter, String condition, Object[] values, String order, String sort, int curPage, int limit);
 	double sum(String parameter, String condition, Object[] values, String order, String sort, int curPage, int limit, boolean isDistinct);
+
+	List<Window> loadByFamilyId(Integer familyId);
+	Window findByFamilyIdAndId(Integer familyId, Integer id);
 }

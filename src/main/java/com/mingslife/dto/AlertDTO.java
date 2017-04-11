@@ -7,19 +7,19 @@ import com.mingslife.model.Alert;
 public class AlertDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private String message;
 
-	public Integer getId() {
-		return id;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public Alert toModel() {
 		Alert model = new Alert();
-		model.setId(id);
+		model.setMessage(message);
 		return model;
 	}
 }

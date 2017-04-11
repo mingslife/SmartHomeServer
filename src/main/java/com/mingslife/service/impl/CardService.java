@@ -164,4 +164,14 @@ public class CardService implements ICardService {
 	public double sum(String parameter, String condition, Object[] values, String order, String sort, int curPage, int limit, boolean isDistinct) {
 		return cardMapper.sum(parameter, SQLUtil.fillCondition(condition, values), order, sort, SQLUtil.getOffset(curPage, limit), limit, isDistinct);
 	}
+
+	@Override
+	public List<Card> loadByFamilyId(Integer familyId) {
+		return cardMapper.loadByFamilyId(familyId);
+	}
+
+	@Override
+	public Card findByFamilyIdAndId(Integer familyId, Integer id) {
+		return cardMapper.findByFamilyIdAndId(familyId, id);
+	}
 }
