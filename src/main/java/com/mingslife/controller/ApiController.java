@@ -201,6 +201,19 @@ public class ApiController extends BaseController {
 		}
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/door/open", method = RequestMethod.POST)
+	public void openDoor(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @RequestParam("cardNumber") String cardNumber) {
+		if (doorService.findByFamilyIdAndId(familyId, id) != null && cardService.findByFamilyIdAndCardNumber(familyId, cardNumber) != null) {
+			Door door = new Door();
+			door.setId(id);
+			door.setStatus((byte) 1);
+			doorService.update(door);
+		} else {
+			throw new WebException("无数据！");
+		}
+	}
+
 
 
 	@ResponseBody

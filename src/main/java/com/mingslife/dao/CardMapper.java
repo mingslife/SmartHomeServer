@@ -20,4 +20,5 @@ public interface CardMapper {
 
 	List<Card> loadByFamilyId(@Param("familyId") Integer familyId);
 	Card findByFamilyIdAndId(@Param("familyId") Integer familyId, @Param("id") Integer id);
+	Card findByFamilyIdAndCardNumber(@Param("familyId") Integer familyId, @Param("cardNumber") String cardNumber);
 }

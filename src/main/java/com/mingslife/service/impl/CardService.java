@@ -174,4 +174,9 @@ public class CardService implements ICardService {
 	public Card findByFamilyIdAndId(Integer familyId, Integer id) {
 		return cardMapper.findByFamilyIdAndId(familyId, id);
 	}
+
+	@Override
+	public Card findByFamilyIdAndCardNumber(Integer familyId, String cardNumber) {
+		return cardMapper.findByFamilyIdAndCardNumber(familyId, cardNumber);
+	}
 }

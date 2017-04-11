@@ -38,4 +38,5 @@ public interface ICardService {
 
 	List<Card> loadByFamilyId(Integer familyId);
 	Card findByFamilyIdAndId(Integer familyId, Integer id);
+	Card findByFamilyIdAndCardNumber(Integer familyId, String cardNumber);
 }

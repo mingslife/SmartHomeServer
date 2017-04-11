@@ -153,4 +153,7 @@
   <select id="findByFamilyIdAndId" resultMap="BaseResultMap">
     select id, family_id, card_number from cards where family_id = #{familyId,jdbcType=INTEGER} and id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="findByFamilyIdAndCardNumber" resultMap="BaseResultMap">
+    select id, family_id, card_number from cards where family_id = #{familyId,jdbcType=INTEGER} and card_number = #{cardNumber,jdbcType=VARCHAR}
+  </select>
 </mapper>
