@@ -884,3 +884,29 @@ SmartHomeServer
 > ```javascript
 > {"id":1,"familyId":1,"status":0}
 > ```
+
+## 其他相关API
+### 新增家庭组
+请求URL
+> api/family/new
+
+请求方式
+> POST
+
+请求参数
+> |请求参数    |参数类型    |参数说明    |
+> |------------|------------|------------|
+> |token       |string      |家庭组令牌  |
+> |appToken    |string      |应用认证令牌|
+
+返回
+> |返回参数    |参数类型    |返回说明    |
+> |------------|------------|------------|
+> |id          |int         |家庭组ID    |
+> |token       |string      |家庭组令牌  |
+> |isActive    |bool        |是否激活(true是 false否)|
+
+返回示例
+> ```javascript
+> {"id":3,"token":"123456","isActive":true}
+> ```
