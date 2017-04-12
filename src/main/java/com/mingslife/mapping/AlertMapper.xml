@@ -5,14 +5,12 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="family_id" property="familyId" jdbcType="INTEGER" />
     <result column="message" property="message" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="record_date" property="recordDate" jdbcType="TIMESTAMP" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="BaseColumnList">
-    id, family_id, message, status, create_date, update_date,
-  
+    id, family_id, message, record_date, create_date, update_date
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
@@ -26,12 +24,10 @@
   <insert id="insert" parameterType="com.mingslife.model.Alert" useGeneratedKeys="true" keyProperty="id">
     insert into alerts (
       id, family_id, message,
-      status, record_date, create_date,
-      update_date
+      record_date, create_date, update_date
     ) values (
       #{id,jdbcType=INTEGER}, #{familyId,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR},
-      #{status,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{recordDate,jdbcType=TIMESTAMP},
-      #{updateDate,jdbcType=TIMESTAMP}
+      #{createDate,jdbcType=TIMESTAMP}, #{recordDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
     )
   </insert>
   <insert id="insertSelective" parameterType="com.mingslife.model.Alert">
@@ -45,9 +41,6 @@
       </if>
       <if test="message != null">
         message,
-      </if>
-      <if test="status != null">
-        status,
       </if>
       <if test="recordDate != null">
         record_date,
@@ -69,9 +62,6 @@
       <if test="message != null">
         #{message,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
       <if test="recordDate != null">
         #{recordDate,jdbcType=TIMESTAMP},
       </if>
@@ -92,9 +82,6 @@
       <if test="message != null">
         message = #{message,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
-      </if>
       <if test="recordDate != null">
         record_date = #{recordDate,jdbcType=TIMESTAMP},
       </if>
@@ -112,7 +99,6 @@
     set
       family_id = #{familyId,jdbcType=INTEGER},
       message = #{message,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
       record_date = #{recordDate,jdbcType=TIMESTAMP},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP}

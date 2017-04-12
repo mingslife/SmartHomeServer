@@ -173,12 +173,12 @@
     select ${parameters} from humitures where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="loadByFamilyId" resultMap="BaseResultMap">
-    select id, family_id, temperature, humidity from humitures where family_id = #{familyId,jdbcType=INTEGER} order by record_date desc
+    select id, family_id, temperature, humidity, record_date from humitures where family_id = #{familyId,jdbcType=INTEGER} order by record_date desc
   </select>
   <select id="findByFamilyIdAndId" resultMap="BaseResultMap">
-    select id, family_id, temperature, humidity from humitures where family_id = #{familyId,jdbcType=INTEGER} and id = #{id,jdbcType=INTEGER}
+    select id, family_id, temperature, humidity, record_date from humitures where family_id = #{familyId,jdbcType=INTEGER} and id = #{id,jdbcType=INTEGER}
   </select>
   <select id="findLastestByFamilyId" resultMap="BaseResultMap">
-    select id, family_id, temperature, humidity from humitures where family_id = #{familyId,jdbcType=INTEGER} order by record_date desc limit 1
+    select id, family_id, temperature, humidity, record_date from humitures where family_id = #{familyId,jdbcType=INTEGER} order by record_date desc limit 1
   </select>
 </mapper>

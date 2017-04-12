@@ -13,7 +13,6 @@ public class Alert implements Serializable {
 	private Integer id;
 	private Integer familyId;
 	private String message;
-	private Byte status;
 	private Date recordDate;
 	@JsonIgnore
 	@CreateDate
@@ -44,14 +43,6 @@ public class Alert implements Serializable {
 
 	public void setMessage(String message) {
 		this.message = message;
-	}
-
-	public Byte getStatus() {
-		return status;
-	}
-
-	public void setStatus(Byte status) {
-		this.status = status;
 	}
 
 	public Date getRecordDate() {

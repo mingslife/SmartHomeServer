@@ -81,20 +81,21 @@ public class ApiController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/alert/create", method = RequestMethod.POST)
-	public Integer createAlert(@RequestParam("familyId") Integer familyId, @Valid @ModelAttribute AlertDTO alertDTO) {
+	public Alert createAlert(@RequestParam("familyId") Integer familyId, @Valid @ModelAttribute AlertDTO alertDTO) {
 		Alert alert = alertDTO.toModel();
 		alert.setFamilyId(familyId);
 		alert.setRecordDate(new Date());
 		alertService.save(alert);
-		return alert.getId();
+		return alert;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/alert/modify", method = RequestMethod.POST)
-	public void modifyAlert(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute AlertDTO alertDTO) {
+	public Alert modifyAlert(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute AlertDTO alertDTO) {
 		if (alertService.findByFamilyIdAndId(familyId, id) != null) {
 			Alert alert = alertDTO.toModel();
 			alertService.update(alert);
+			return alertService.findByFamilyIdAndId(familyId, id);
 		} else {
 			throw new WebException("无数据！");
 		}
@@ -102,9 +103,11 @@ public class ApiController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/alert/destroy", method = RequestMethod.POST)
-	public void destroyAlert(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id) {
-		if (alertService.findByFamilyIdAndId(familyId, id) != null) {
+	public Alert destroyAlert(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id) {
+		Alert alert = alertService.findByFamilyIdAndId(familyId, id);
+		if (alert != null) {
 			alertService.delete(id);
+			return alert;
 		} else {
 			throw new WebException("无数据！");
 		}
@@ -135,19 +138,20 @@ public class ApiController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/card/create", method = RequestMethod.POST)
-	public Integer createCard(@RequestParam("familyId") Integer familyId, @Valid @ModelAttribute CardDTO cardDTO) {
+	public Card createCard(@RequestParam("familyId") Integer familyId, @Valid @ModelAttribute CardDTO cardDTO) {
 		Card card = cardDTO.toModel();
 		card.setFamilyId(familyId);
 		cardService.save(card);
-		return card.getId();
+		return card;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/card/modify", method = RequestMethod.POST)
-	public void modifyCard(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute CardDTO cardDTO) {
+	public Card modifyCard(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute CardDTO cardDTO) {
 		if (cardService.findByFamilyIdAndId(familyId, id) != null) {
 			Card card = cardDTO.toModel();
 			cardService.update(card);
+			return cardService.findByFamilyIdAndId(familyId, id);
 		} else {
 			throw new WebException("无数据！");
 		}
@@ -155,9 +159,11 @@ public class ApiController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/card/destroy", method = RequestMethod.POST)
-	public void destroyCard(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id) {
-		if (cardService.findByFamilyIdAndId(familyId, id) != null) {
+	public Card destroyCard(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id) {
+		Card card = cardService.findByFamilyIdAndId(familyId, id);
+		if (card != null) {
 			cardService.delete(id);
+			return card;
 		} else {
 			throw new WebException("无数据！");
 		}
@@ -181,19 +187,20 @@ public class ApiController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/door/create", method = RequestMethod.POST)
-	public Integer createDoor(@RequestParam("familyId") Integer familyId, @Valid @ModelAttribute DoorDTO doorDTO) {
+	public Door createDoor(@RequestParam("familyId") Integer familyId, @Valid @ModelAttribute DoorDTO doorDTO) {
 		Door door = doorDTO.toModel();
 		door.setFamilyId(familyId);
 		doorService.save(door);
-		return door.getId();
+		return door;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/door/modify", method = RequestMethod.POST)
-	public void modifyDoor(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute DoorDTO doorDTO) {
+	public Door modifyDoor(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute DoorDTO doorDTO) {
 		if (doorService.findByFamilyIdAndId(familyId, id) != null) {
 			Door door = doorDTO.toModel();
 			doorService.update(door);
+			return doorService.findByFamilyIdAndId(familyId, id);
 		} else {
 			throw new WebException("无数据！");
 		}
@@ -201,9 +208,11 @@ public class ApiController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/door/destroy", method = RequestMethod.POST)
-	public void destroyDoor(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id) {
-		if (doorService.findByFamilyIdAndId(familyId, id) != null) {
+	public Door destroyDoor(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id) {
+		Door door = doorService.findByFamilyIdAndId(familyId, id);
+		if (door != null) {
 			doorService.delete(id);
+			return door;
 		} else {
 			throw new WebException("无数据！");
 		}
@@ -211,12 +220,12 @@ public class ApiController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/door/open", method = RequestMethod.POST)
-	public void openDoor(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @RequestParam("cardNumber") String cardNumber) {
-		if (doorService.findByFamilyIdAndId(familyId, id) != null && cardService.findByFamilyIdAndCardNumber(familyId, cardNumber) != null) {
-			Door door = new Door();
-			door.setId(id);
+	public Door openDoor(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @RequestParam("cardNumber") String cardNumber) {
+		Door door = doorService.findByFamilyIdAndId(familyId, id);
+		if (door != null && cardService.findByFamilyIdAndCardNumber(familyId, cardNumber) != null) {
 			door.setStatus((byte) 1);
 			doorService.update(door);
+			return door;
 		} else {
 			throw new WebException("无数据！");
 		}
@@ -240,20 +249,21 @@ public class ApiController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/humiture/create", method = RequestMethod.POST)
-	public Integer createHumiture(@RequestParam("familyId") Integer familyId, @Valid @ModelAttribute HumitureDTO humitureDTO) {
+	public Humiture createHumiture(@RequestParam("familyId") Integer familyId, @Valid @ModelAttribute HumitureDTO humitureDTO) {
 		Humiture humiture = humitureDTO.toModel();
 		humiture.setFamilyId(familyId);
 		humiture.setRecordDate(new Date());
 		humitureService.save(humiture);
-		return humiture.getId();
+		return humiture;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/humiture/modify", method = RequestMethod.POST)
-	public void modifyHumiture(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute HumitureDTO humitureDTO) {
+	public Humiture modifyHumiture(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute HumitureDTO humitureDTO) {
 		if (humitureService.findByFamilyIdAndId(familyId, id) != null) {
 			Humiture humiture = humitureDTO.toModel();
 			humitureService.update(humiture);
+			return humitureService.findByFamilyIdAndId(familyId, id);
 		} else {
 			throw new WebException("无数据！");
 		}
@@ -261,9 +271,11 @@ public class ApiController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/humiture/destroy", method = RequestMethod.POST)
-	public void destroyHumiture(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id) {
-		if (humitureService.findByFamilyIdAndId(familyId, id) != null) {
+	public Humiture destroyHumiture(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id) {
+		Humiture humiture = humitureService.findByFamilyIdAndId(familyId, id);
+		if (humiture != null) {
 			humitureService.delete(id);
+			return humiture;
 		} else {
 			throw new WebException("无数据！");
 		}
@@ -294,19 +306,20 @@ public class ApiController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/lamp/create", method = RequestMethod.POST)
-	public Integer createLamp(@RequestParam("familyId") Integer familyId, @Valid @ModelAttribute LampDTO lampDTO) {
+	public Lamp createLamp(@RequestParam("familyId") Integer familyId, @Valid @ModelAttribute LampDTO lampDTO) {
 		Lamp lamp = lampDTO.toModel();
 		lamp.setFamilyId(familyId);
 		lampService.save(lamp);
-		return lamp.getId();
+		return lamp;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/lamp/modify", method = RequestMethod.POST)
-	public void modifyLamp(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute LampDTO lampDTO) {
+	public Lamp modifyLamp(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute LampDTO lampDTO) {
 		if (lampService.findByFamilyIdAndId(familyId, id) != null) {
 			Lamp lamp = lampDTO.toModel();
 			lampService.update(lamp);
+			return lampService.findByFamilyIdAndId(familyId, id);
 		} else {
 			throw new WebException("无数据！");
 		}
@@ -314,9 +327,11 @@ public class ApiController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/lamp/destroy", method = RequestMethod.POST)
-	public void destroyLamp(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id) {
-		if (lampService.findByFamilyIdAndId(familyId, id) != null) {
+	public Lamp destroyLamp(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id) {
+		Lamp lamp = lampService.findByFamilyIdAndId(familyId, id);
+		if (lamp != null) {
 			lampService.delete(id);
+			return lamp;
 		} else {
 			throw new WebException("无数据！");
 		}
@@ -340,19 +355,20 @@ public class ApiController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/window/create", method = RequestMethod.POST)
-	public Integer createWindow(@RequestParam("familyId") Integer familyId, @Valid @ModelAttribute WindowDTO windowDTO) {
+	public Window createWindow(@RequestParam("familyId") Integer familyId, @Valid @ModelAttribute WindowDTO windowDTO) {
 		Window window = windowDTO.toModel();
 		window.setFamilyId(familyId);
 		windowService.save(window);
-		return window.getId();
+		return window;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/window/modify", method = RequestMethod.POST)
-	public void modifyWindow(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute WindowDTO windowDTO) {
+	public Window modifyWindow(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute WindowDTO windowDTO) {
 		if (windowService.findByFamilyIdAndId(familyId, id) != null) {
 			Window window = windowDTO.toModel();
 			windowService.update(window);
+			return windowService.findByFamilyIdAndId(familyId, id);
 		} else {
 			throw new WebException("无数据！");
 		}
@@ -360,9 +376,11 @@ public class ApiController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/window/destroy", method = RequestMethod.POST)
-	public void destroyWindow(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id) {
-		if (windowService.findByFamilyIdAndId(familyId, id) != null) {
+	public Window destroyWindow(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id) {
+		Window window = windowService.findByFamilyIdAndId(familyId, id);
+		if (window != null) {
 			windowService.delete(id);
+			return window;
 		} else {
 			throw new WebException("无数据！");
 		}
