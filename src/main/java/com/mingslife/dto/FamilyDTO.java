@@ -7,19 +7,19 @@ import com.mingslife.model.Family;
 public class FamilyDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private String token;
 
-	public Integer getId() {
-		return id;
+	public String getToken() {
+		return token;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public Family toModel() {
 		Family model = new Family();
-		model.setId(id);
+		model.setToken(token);
 		return model;
 	}
 }

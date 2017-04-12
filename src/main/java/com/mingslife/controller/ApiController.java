@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mingslife.dto.AlertDTO;
 import com.mingslife.dto.CardDTO;
 import com.mingslife.dto.DoorDTO;
+import com.mingslife.dto.FamilyDTO;
 import com.mingslife.dto.HumitureDTO;
 import com.mingslife.dto.LampDTO;
 import com.mingslife.dto.WindowDTO;
 import com.mingslife.model.Alert;
 import com.mingslife.model.Card;
 import com.mingslife.model.Door;
+import com.mingslife.model.Family;
 import com.mingslife.model.Humiture;
 import com.mingslife.model.Lamp;
 import com.mingslife.model.Window;
@@ -55,6 +57,8 @@ public class ApiController extends BaseController {
 	@Autowired
 	private IWindowService windowService;
 
+	// ==============================
+
 	@ResponseBody
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
 	public Map<String, Object> test() {
@@ -63,7 +67,7 @@ public class ApiController extends BaseController {
 		return jsonMap;
 	}
 
-
+	// ==============================
 
 	@ResponseBody
 	@RequestMapping(value = "/alert/list", method = RequestMethod.POST)
@@ -120,7 +124,7 @@ public class ApiController extends BaseController {
 		return alert;
 	}
 
-
+	// ==============================
 
 	@ResponseBody
 	@RequestMapping(value = "/card/list", method = RequestMethod.POST)
@@ -169,7 +173,7 @@ public class ApiController extends BaseController {
 		}
 	}
 
-
+	// ==============================
 
 	@ResponseBody
 	@RequestMapping(value = "/door/list", method = RequestMethod.POST)
@@ -231,7 +235,7 @@ public class ApiController extends BaseController {
 		}
 	}
 
-
+	// ==============================
 
 	@ResponseBody
 	@RequestMapping(value = "/humiture/list", method = RequestMethod.POST)
@@ -288,7 +292,7 @@ public class ApiController extends BaseController {
 		return humiture;
 	}
 
-
+	// ==============================
 
 	@ResponseBody
 	@RequestMapping(value = "/lamp/list", method = RequestMethod.POST)
@@ -337,7 +341,7 @@ public class ApiController extends BaseController {
 		}
 	}
 
-
+	// ==============================
 
 	@ResponseBody
 	@RequestMapping(value = "/window/list", method = RequestMethod.POST)
@@ -386,11 +390,33 @@ public class ApiController extends BaseController {
 		}
 	}
 
+	// ==============================
 
+	@ResponseBody
+	@RequestMapping(value = "/family/new", method = RequestMethod.POST)
+	public Family newFamily(@RequestParam("appToken") String appToken, @Valid @ModelAttribute FamilyDTO familyDTO) {
+		@SuppressWarnings("unchecked")
+		Map<String, String> applicationMap = (Map<String, String>) application.getAttribute("application");
+		String allowAppToken = applicationMap.get("appToken");
+		if (appToken.equals(allowAppToken)) {
+			Family family = familyDTO.toModel();
+			family.setIsActive(true);
+			familyService.save(family);
+			return family;
+		} else {
+			throw new WebException("无效AppToken！");
+		}
+	}
+
+	// ==============================
 
 	@ModelAttribute
-	public void validate(@RequestParam("familyId") Integer familyId, @RequestParam("token") String token) {
-		if (familyService.findByIdAndToken(familyId, token) == null) {
+	public void validate(@RequestParam(value = "familyId", required = false) Integer familyId, @RequestParam("token") String token) {
+		String requestURI = request.getRequestURI();
+		if (requestURI.indexOf("/api/family/new") != -1) {
+			return;
+		}
+		if (familyId == null || familyService.findByIdAndToken(familyId, token) == null) {
 			throw new WebException("无效家庭组！");
 		}
 	}
