@@ -174,4 +174,9 @@ public class AlertService implements IAlertService {
 	public Alert findByFamilyIdAndId(Integer familyId, Integer id) {
 		return alertMapper.findByFamilyIdAndId(familyId, id);
 	}
+
+	@Override
+	public Alert findLastestByFamilyId(Integer familyId) {
+		return alertMapper.findLastestByFamilyId(familyId);
+	}
 }

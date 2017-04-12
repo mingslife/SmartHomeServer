@@ -20,4 +20,5 @@ public interface AlertMapper {
 
 	List<Alert> loadByFamilyId(@Param("familyId") Integer familyId);
 	Alert findByFamilyIdAndId(@Param("familyId") Integer familyId, @Param("id") Integer id);
+	Alert findLastestByFamilyId(@Param("familyId") Integer familyId);
 }

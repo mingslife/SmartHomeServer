@@ -14,6 +14,7 @@ public class Alert implements Serializable {
 	private Integer familyId;
 	private String message;
 	private Byte status;
+	private Date recordDate;
 	@JsonIgnore
 	@CreateDate
 	private Date createDate;
@@ -51,6 +52,14 @@ public class Alert implements Serializable {
 
 	public void setStatus(Byte status) {
 		this.status = status;
+	}
+
+	public Date getRecordDate() {
+		return recordDate;
+	}
+
+	public void setRecordDate(Date recordDate) {
+		this.recordDate = recordDate;
 	}
 
 	public Date getCreateDate() {

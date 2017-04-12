@@ -84,6 +84,7 @@ public class ApiController extends BaseController {
 	public Integer createAlert(@RequestParam("familyId") Integer familyId, @Valid @ModelAttribute AlertDTO alertDTO) {
 		Alert alert = alertDTO.toModel();
 		alert.setFamilyId(familyId);
+		alert.setRecordDate(new Date());
 		alertService.save(alert);
 		return alert.getId();
 	}
@@ -107,6 +108,13 @@ public class ApiController extends BaseController {
 		} else {
 			throw new WebException("无数据！");
 		}
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/alert/lastest", method = RequestMethod.POST)
+	public Alert lastestAlert(@RequestParam("familyId") Integer familyId) {
+		Alert alert = alertService.findLastestByFamilyId(familyId);
+		return alert;
 	}
 
 
@@ -262,7 +270,7 @@ public class ApiController extends BaseController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/humiture/last", method = RequestMethod.POST)
+	@RequestMapping(value = "/humiture/lastest", method = RequestMethod.POST)
 	public Humiture lastestHumiture(@RequestParam("familyId") Integer familyId) {
 		Humiture humiture = humitureService.findLastestByFamilyId(familyId);
 		return humiture;

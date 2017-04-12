@@ -38,4 +38,5 @@ public interface IAlertService {
 
 	List<Alert> loadByFamilyId(Integer familyId);
 	Alert findByFamilyIdAndId(Integer familyId, Integer id);
+	Alert findLastestByFamilyId(Integer familyId);
 }

@@ -23,6 +23,7 @@ CREATE TABLE `alerts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `family_id` int(11) NOT NULL,
   `message` varchar(255) NOT NULL,
+  `record_date` datetime NOT NULL,
   `create_date` datetime DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
