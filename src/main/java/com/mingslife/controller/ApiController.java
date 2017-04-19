@@ -98,6 +98,7 @@ public class ApiController extends BaseController {
 	public Alert modifyAlert(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute AlertDTO alertDTO) {
 		if (alertService.findByFamilyIdAndId(familyId, id) != null) {
 			Alert alert = alertDTO.toModel();
+			alert.setId(id);
 			alertService.update(alert);
 			return alertService.findByFamilyIdAndId(familyId, id);
 		} else {
@@ -154,6 +155,7 @@ public class ApiController extends BaseController {
 	public Card modifyCard(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute CardDTO cardDTO) {
 		if (cardService.findByFamilyIdAndId(familyId, id) != null) {
 			Card card = cardDTO.toModel();
+			card.setId(id);
 			cardService.update(card);
 			return cardService.findByFamilyIdAndId(familyId, id);
 		} else {
@@ -203,6 +205,7 @@ public class ApiController extends BaseController {
 	public Door modifyDoor(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute DoorDTO doorDTO) {
 		if (doorService.findByFamilyIdAndId(familyId, id) != null) {
 			Door door = doorDTO.toModel();
+			door.setId(id);
 			doorService.update(door);
 			return doorService.findByFamilyIdAndId(familyId, id);
 		} else {
@@ -266,6 +269,7 @@ public class ApiController extends BaseController {
 	public Humiture modifyHumiture(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute HumitureDTO humitureDTO) {
 		if (humitureService.findByFamilyIdAndId(familyId, id) != null) {
 			Humiture humiture = humitureDTO.toModel();
+			humiture.setId(id);
 			humitureService.update(humiture);
 			return humitureService.findByFamilyIdAndId(familyId, id);
 		} else {
@@ -322,6 +326,7 @@ public class ApiController extends BaseController {
 	public Lamp modifyLamp(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute LampDTO lampDTO) {
 		if (lampService.findByFamilyIdAndId(familyId, id) != null) {
 			Lamp lamp = lampDTO.toModel();
+			lamp.setId(id);
 			lampService.update(lamp);
 			return lampService.findByFamilyIdAndId(familyId, id);
 		} else {
@@ -371,6 +376,7 @@ public class ApiController extends BaseController {
 	public Window modifyWindow(@RequestParam("familyId") Integer familyId, @RequestParam("id") Integer id, @Valid @ModelAttribute WindowDTO windowDTO) {
 		if (windowService.findByFamilyIdAndId(familyId, id) != null) {
 			Window window = windowDTO.toModel();
+			window.setId(id);
 			windowService.update(window);
 			return windowService.findByFamilyIdAndId(familyId, id);
 		} else {
